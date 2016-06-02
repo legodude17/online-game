@@ -1,0 +1,30 @@
+{
+  "name": "lazy-deps",
+  "version": "1.0.0",
+  "description": "A dependencie manager thingy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Will make a test soon\\\" & exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+http://github.com/legodude17/deps"
+  },
+  "keywords": [
+    "dependency",
+    "manage",
+    "parse"
+  ],
+  "author": "JDB",
+  "license": "MIT",
+  "dependencies": {
+    "JSONStream": "^1.1.1",
+    "acorn": "^3.1.0",
+    "asynquence": "^0.9.0",
+    "concat-stream": "^1.5.1",
+    "is-core-module": "^1.0.2",
+    "magicpen": "^5.9.3",
+    "readdir": "0.0.13",
+    "request": "^2.72.0"
+  }
+}
