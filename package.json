@@ -4,8 +4,12 @@
   "description": "A dependencie manager thingy.",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \\\"Will make a test soon\\\" & exit 0",
     "build": "npm link && ln -sf ~/.npm-packages/lib/node_modules/lazy-deps/index.js ~/.npm-packages/bin/deps "
+=======
+    "test": "echo \\\"Will make a test soon\\\" & exit 0"
+>>>>>>> d85eafbc9b0df221da5697620e2392c641e990bd
   },
   "repository": {
     "type": "git",
@@ -26,10 +30,14 @@
     "is-core-module": "^1.0.2",
     "magicpen": "^5.9.3",
     "readdir": "0.0.13",
+<<<<<<< HEAD
     "request": "^2.72.0",
     "tar.gz": "^1.0.5"
   },
   "devDependencies": {
     "debug": "^2.2.0"
+=======
+    "request": "^2.72.0"
+>>>>>>> d85eafbc9b0df221da5697620e2392c641e990bd
   }
 }
