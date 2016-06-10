@@ -19,9 +19,9 @@ var game = new OnlineGame(options);
 MIT © [legodudejb@gmail.com]()
 
 
-[npm-image]: https://badge.fury.io/js/online-game-library.svg
-[npm-url]: https://npmjs.org/package/online-game-library
-[travis-image]: https://travis-ci.org/legodude17/online-game-library.svg?branch=master
-[travis-url]: https://travis-ci.org/legodude17/online-game-library
-[daviddm-image]: https://david-dm.org/legodude17/online-game-library.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/legodude17/online-game-library
+[npm-image]: https://badge.fury.io/js/online-game.svg
+[npm-url]: https://npmjs.org/package/online-game
+[travis-image]: https://travis-ci.org/legodude17/online-game.svg?branch=master
+[travis-url]: https://travis-ci.org/legodude17/online-game
+[daviddm-image]: https://david-dm.org/legodude17/online-game.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/legodude17/online-game
