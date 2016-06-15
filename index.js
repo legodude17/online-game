@@ -20,7 +20,7 @@ var OnlineGame = module.exports = function (port, cb, lvl, couchdbOpts, stdout) 
   this.server = http.createServer(this.app);
   this.io = socket(this.server);
   this.client = new CouchDbClient(couchdbOpts);
-  this.app.listen(port, function () {
+  this.server.listen(port, function () {
     log.http('Init', 'Server started on port', port);
     if (cb) {
       cb();
@@ -29,8 +29,8 @@ var OnlineGame = module.exports = function (port, cb, lvl, couchdbOpts, stdout) 
   this.connections = [];
   this.io.on('connection', function (socket) {
     var id = this.connections.length;
-    log.info('Socket', 'Client ', id, 'connected');
-    this.emit('connection', socket);
+    log.info('Socket', 'Client', id, 'connected');
+    this.emit('client:connection', socket);
     this.connections.push(socket);
     socket.on('error', function (err) {
       this.emit('error', err);
@@ -38,6 +38,7 @@ var OnlineGame = module.exports = function (port, cb, lvl, couchdbOpts, stdout) 
     }.bind(this));
     socket.on('disconnect', function () {
       log.info('Socket', 'Client', id, 'disconnected');
+      this.emit('client:disconnection', id);
       this.connections.splice(id, 1);
     });
   }.bind(this));
@@ -51,13 +52,24 @@ OnlineGame.prototype.addFile = function (path, file) {
     res.sendFile(file || path);
   });
 };
-OnlineGame.prototype.initDBs = function (exclude, include, cb) {
-  var defaults = ['users', 'maps'],
-    actual = defaults.concat(include).filter(function (v) {
-      return exclude.includes(v);
-    }),
-    completed = 0;
+OnlineGame.prototype.initDBs = function (dbs, cb) {
+  var actual = ['users', 'maps'].concat(dbs),
+    datas = [],
+    errors = [];
   actual.forEach(function (v) {
-    this.client.createDB(v);
+    this.client.createDB(v, function (err, data) {
+      if (err) {
+        errors.push(err);
+      } else {
+        datas.push(data);
+      }
+      if (actual.length === datas.length + errors.length) {
+        if (errors.length) {
+          cb(errors);
+        } else {
+          cb(null, datas);
+        }
+      }
+    });
   }.bind(this));
 };

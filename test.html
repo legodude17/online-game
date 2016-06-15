@@ -1,4 +1,8 @@
 <!DOCTYPE html>
 <html>
-  
+  <script src="node_modules/socket.io-client/socket.io.js"></script>
+  <script>
+    var socket = io();
+    socket.emit('online', "hello");
+  </script>
 </html>
