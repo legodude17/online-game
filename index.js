@@ -40,7 +40,8 @@ var OnlineGame = module.exports = function (port, cb, lvl, couchdbOpts, stdout) 
       log.info('Socket', 'Client', id, 'disconnected');
       this.emit('client:disconnection', id);
       this.connections.splice(id, 1);
-    });
+    }.bind(this));
+    socket.on('message', function (arg) {this.emit('message', arg); });
   }.bind(this));
 };
 util.inherits(OnlineGame, EE);
@@ -72,4 +73,12 @@ OnlineGame.prototype.initDBs = function (dbs, cb) {
       }
     });
   }.bind(this));
+};
+OnlineGame.prototype.send = function (message, id) {
+  log.verbose('Send', 'Sending', message, 'to', id === undefined ? 'all' : id);
+  if (id !== undefined) {
+    this.connections[id].emit('message', typeof message === 'string' ? message : util.inspect(message));
+    return;
+  }
+  this.io.emit('message', typeof message === 'string' ? message : util.inspect(message));
 };

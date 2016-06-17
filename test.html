@@ -4,5 +4,8 @@
   <script>
     var socket = io();
     socket.emit('online', "hello");
+    socket.on('message', function (msg) {
+      console.log(msg);
+    });
   </script>
 </html>
